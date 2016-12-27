@@ -15,7 +15,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.gson.internal.bind.ArrayTypeAdapter;
 import com.handroidack.coolweather.constans.Constants;
 import com.handroidack.coolweather.db.City;
 import com.handroidack.coolweather.db.County;
@@ -160,7 +159,7 @@ public class ChooseAreaFragment extends Fragment {
             mListView.setSelection(0);
             currentLevel = LEVEL_PROVINCE;
         } else {
-            queryFromServer(Constants.QUERY_WEATHER_ADRESS, "province");
+            queryFromServer(Constants.QUERY_CITY_ADRESS, "province");
         }
     }
 
@@ -183,7 +182,7 @@ public class ChooseAreaFragment extends Fragment {
             currentLevel = LEVEL_CITY;
         } else {
             int provinceCode = selectedProvince.getProvinceCode();
-            String address = Constants.QUERY_WEATHER_ADRESS + provinceCode;
+            String address = Constants.QUERY_CITY_ADRESS + provinceCode;
             LogUtil.i("cityAddress:", address);
             queryFromServer(address, "city");
         }
@@ -207,7 +206,7 @@ public class ChooseAreaFragment extends Fragment {
         } else {
             int provinceCode = selectedProvince.getProvinceCode();
             int cityCode = selectedCity.getCityCode();
-            String address = Constants.QUERY_WEATHER_ADRESS + provinceCode + "/" + cityCode;
+            String address = Constants.QUERY_CITY_ADRESS + provinceCode + "/" + cityCode;
             queryFromServer(address, "county");
         }
     }

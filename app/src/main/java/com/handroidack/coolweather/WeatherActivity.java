@@ -1,5 +1,6 @@
 package com.handroidack.coolweather;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Build;
@@ -23,6 +24,7 @@ import com.bumptech.glide.Glide;
 import com.handroidack.coolweather.constans.Constants;
 import com.handroidack.coolweather.gson.Forecast;
 import com.handroidack.coolweather.gson.Weather;
+import com.handroidack.coolweather.service.AutoUpdateService;
 import com.handroidack.coolweather.util.HttpUtil;
 import com.handroidack.coolweather.util.LogUtil;
 import com.handroidack.coolweather.util.Utility;
@@ -183,10 +185,16 @@ public class WeatherActivity extends AppCompatActivity {
     }
 
     /**
-     * 处理并展示Weather实体类中的数据
+     * 处理并展示Weather实体类中的数据,同时开启后台服务，定时去更新天气信息
      * @param weather
      */
     private void showWeatherInfo(Weather weather) {
+        if (weather != null && "ok".equals(weather.status)) {
+            Intent intent = new Intent(this, AutoUpdateService.class);
+            startService(intent);
+        }else{
+            Toast.makeText(WeatherActivity.this, "获取天气信息失败", Toast.LENGTH_SHORT).show();
+        }
         String cityName = weather.basic.cityName;
         String updateTime = weather.basic.update.updateTime;
         String degree = weather.now.temperature + "℃";

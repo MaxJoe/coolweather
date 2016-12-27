@@ -7,7 +7,7 @@ package com.handroidack.coolweather.constans;
 
 public class Constants {
 
-    public static final String QUERY_WEATHER_ADRESS = "http://guolin.tech/api/china/";
+    public static final String QUERY_CITY_ADRESS = "http://guolin.tech/api/china/";
 
     public static final String WEATHER_BASIC_QUERY_URL = "http://guolin.tech/api/weather?cityid=";
 
